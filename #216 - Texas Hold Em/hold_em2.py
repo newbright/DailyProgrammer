@@ -75,10 +75,11 @@ class Player:
     #Global list of "community cards" corresponding to the flop, turn, and river.
     communityCards = []
 
-    #Initializes Player with a name and a new hand, later populated from the Deck.
+    #Initializes Player with a name, fold status, and a new hand later populated from the Deck.
     def __init__(self, name):
         self.name = name
         self.hand = Hand()
+        self.folded = False
     
     #TODO: Implement handRank method to evaluate rank of hand.
         
@@ -119,6 +120,14 @@ def main():
         p.hand.printHand()
         print("")
     
+    #There is no way the folded() property can be True at this point, but we still check for the sake of convention.
+    if !players["Player"].folded():    
+        print("Will you fold?")
+        #TODO: Clean up this input.
+        foldChoice = str(input("(y/n): "))
+            if foldchoice == "y":
+                players["Player"].folded() = True
+    
     print("")    
     print("Here's the flop...")
     
@@ -128,6 +137,14 @@ def main():
         Player.communityCards.append(card)
         #Display the card
         print(card.toString())
+        
+    #We only prompt the player to fold if they have not yet done so.
+    if !players["Player"].folded():    
+        print("Will you fold?")
+        #TODO: Clean up this input.
+        foldChoice = str(input("(y/n): "))
+            if foldchoice == "y":
+                players["Player"].folded() = True
     
     print("")
     print("Here's the turn...")
@@ -138,6 +155,14 @@ def main():
         Player.communityCards.append(card)
         #Display the card
         print(card.toString())
+        
+    #We only prompt the player to fold if they have not yet done so.
+    if !players["Player"].folded():    
+        print("Will you fold?")
+        #TODO: Clean up this input.
+        foldChoice = str(input("(y/n): "))
+            if foldchoice == "y":
+                players["Player"].folded() = True
         
     print("")
     print("And here's the river.")
