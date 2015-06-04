@@ -1,3 +1,10 @@
+#------------------------------------------------------------
+# Challenge #214: "Chester, The Greedy Pomeranian"
+# Difficulty: Hard
+# May 15, 2014
+# Brandon Newbright
+#------------------------------------------------------------
+
 from collections import namedtuple
 from operator import itemgetter
 from pprint import pformat

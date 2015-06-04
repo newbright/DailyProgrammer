@@ -1,3 +1,10 @@
+#------------------------------------------------------------
+# Challenge #165: "Stimulated Ecology - The Forest"
+# Difficulty: Intermediate
+# June 6, 2014
+# Brandon Newbright
+#------------------------------------------------------------
+
 import random
 
 class tree:   

@@ -1,3 +1,10 @@
+#------------------------------------------------------------
+# Challenge #216: "Texas Hold 'Em"
+# Difficulty: Easy
+# May 25, 2014
+# Brandon Newbright
+#------------------------------------------------------------
+
 import random
 
 #Card class. Constructs cards and translates their information.
