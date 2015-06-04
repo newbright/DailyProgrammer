@@ -1,7 +1,7 @@
 #------------------------------------------------------------
 # Challenge #217: "Space Code Breaking"
 # Difficulty: Intermediate
-# June 3, 2014
+# June 3, 2015
 # Brandon Newbright
 #------------------------------------------------------------
 
