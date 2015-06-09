@@ -9,14 +9,12 @@
 import re
 
 expr_tokens = ['+', '-', '*', '/', '=', '(', ')']
-latex_tokens = ['\\', '_', '^', 'sqrt', 'root', 'sub', 'sup', 'pi']
+latex_tokens = ['_', '^', 'sqrt', 'root', 'sub', 'sup', 'pi']
 
 class Node:
 	def __init__(self, value = None, children = []):
         self.value = value
         self.children = children
-
-    def evaluate
 
     def __repr__(self, level=0):
         ret = "\t"*level+repr(self.value)+"\n"
@@ -25,8 +23,15 @@ class Node:
         return ret
 
 
-def parse_to_expr(self, token_list):
-	
+def parse_to_tree(self, token_list, value = "expr"):
+	top = Node(value)
+	for token in token_list:
+		if latex_tokens.contains(token):
+			top.
+		else if token == "\\":
+			pass
+		else:
+			top.children.append(token)
 
 	return Expr()
 
