@@ -64,11 +64,12 @@ def main():
 	planets = ["Omicron V", "Hoth", "Ryza IV", "Htrae"]
 
 	code_lines = open("input/input.txt").read().splitlines()
+	out = open("output.txt", 'w', encoding='utf-8')
 
 	for line in code_lines:
 
-		print "INPUT - " + line
-		print ""
+		print("INPUT - {}".format(line))
+
 		# Create dictionaries to store each score and decoded line with its respective planet
 		scores_dict, decoded_dict = dict.fromkeys(planets), dict.fromkeys(planets)
 
@@ -86,18 +87,17 @@ def main():
 		scores_dict["Htrae"] = score_line(decoded_dict["Htrae"])
 
 		# Print the corresponding decoded output and that output's score for each language
-		print "{}: {} (score: {})".format(planets[0], decoded_dict[planets[0]], scores_dict[planets[0]])
-		print "{}: {} (score: {})".format(planets[1], decoded_dict[planets[1]], scores_dict[planets[1]])
-		print "{}: {} (score: {})".format(planets[2], decoded_dict[planets[2]], scores_dict[planets[2]])
-		print "{}: {} (score: {})".format(planets[3], decoded_dict[planets[3]], scores_dict[planets[3]])
-		print ""
+		out.write("{}: {} (score: {})\n".format(planets[0], decoded_dict[planets[0]], scores_dict[planets[0]]))
+		out.write("{}: {} (score: {})\n".format(planets[1], decoded_dict[planets[1]], scores_dict[planets[1]]))
+		out.write("{}: {} (score: {})\n".format(planets[2], decoded_dict[planets[2]], scores_dict[planets[2]]))
+		out.write("{}: {} (score: {})\n".format(planets[3], decoded_dict[planets[3]], scores_dict[planets[3]]))
+		out.write("\n")
 
 		# Print the decoded line with the highest score
 		max_planet = max(scores_dict, key=scores_dict.get)
-		print "--BEST CHOICE--"
-		print "{}: {} (score: {})".format(max_planet, decoded_dict[max_planet], scores_dict[max_planet])
-		print ""
-		print ""
+		print("--BEST CHOICE--")
+		print("{}: {} (score: {})".format(max_planet, decoded_dict[max_planet], scores_dict[max_planet]))
+		print("")
 
 if __name__ == "__main__":
 	main()

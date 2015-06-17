@@ -48,7 +48,6 @@ def bonus():
 			print("{} yielded by {} items: {}".format(key, len(values), ', '.join(map(str, values))))
 
 palindrome(123)
-
 palindrome(286)
 palindrome(196196871)
 
