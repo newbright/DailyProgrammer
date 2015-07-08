@@ -23,6 +23,7 @@ def enc(msg, key):
     cipher_stream = lcg(x, a, c, m)
 
     for ch in msg:
+        # Each character is altered via a bitwise XOR operation with the pseudo-random generated number
         enc_chars.append(chr(ord(ch) ^ next(cipher_stream)))
 
     return "".join(enc_chars)
