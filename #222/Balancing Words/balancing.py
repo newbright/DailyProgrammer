@@ -1,3 +1,10 @@
+#------------------------------------------------------------
+# Challenge #222: "Balancing Words"
+# Difficulty: Easy
+# July 6, 2015
+# Brandon Newbright
+#------------------------------------------------------------
+
 def weight(char):
   letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
   return letters.index(char) + 1
