@@ -56,7 +56,7 @@ def trim_after_underscore(s):
 # Defines and executes the overall decoding process
 def decode(s):
 
-  # We first trim any newlines which may exist
+  # We first trim any newlines which may exist 
   s = ''.join(s.split('\n'))
 
   # We find the first optimal pair
