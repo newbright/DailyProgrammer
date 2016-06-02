@@ -8,10 +8,12 @@
 import socket
 
 class IRCClient(object):
-  def __init__(self, nickname, username, realname):
+  def __init__(self, nickname, username, realname, channels, message):
     self.nickname = nickname
     self.username = username
     self.realname = realname
+    self.channels = channels.split(",")
+    self.message = message
     self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
   def connect(self, address, port):
@@ -32,7 +34,7 @@ class IRCClient(object):
         print(line)
         command, *params = line.split()
         if command == "PING":
-            self.send("PONG %s" % params[0])
+          self.send("PONG %s" % params[0])
 
 client = IRCClient('newtzor', 'newtzor', 'newtzor')
 client.connect("chat.freenode.net", 6667)
