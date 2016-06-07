@@ -1,4 +1,3 @@
-string = '''   \\\\  /\    
             \\
    /         
       \     \\
@@ -13,7 +12,8 @@ string = '''   \\\\  /\
    /       / 
 TpnQSjdmZdpoohd'''
 
-lines = string.splitlines()
+lines = string.splitlines()string = '''   \\\\  /\    
+
 
 grid = lines[:13]
 word = lines[13]
