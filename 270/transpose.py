@@ -24,10 +24,6 @@ def transpose(s):
     ## input string.
     print(''.join(c))
 
-
-
-
-
 str1 = '''Some
 text.'''
 
