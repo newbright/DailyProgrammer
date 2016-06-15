@@ -7,8 +7,8 @@ SAMPLE_RATE = 8000 # Hz
 SAMPLE_SIZE = 8 # Bits, or 1 Byte
 NUM_CHANNELS = 1 # Mono
 WAVE_FORMAT_PCM = 0x001
-HEADERS_SIZE = 44 - 8
-FORMAT_SIZE = 16
+HEADERS_SIZE = 44 - 8 # Bytes
+FORMAT_SIZE = 16 # Bits
 
 # Other constants
 NOTE_DURATION = 300 # ms
@@ -21,7 +21,7 @@ FREQUENCY = {
   'F' : 698.46,
   'G' : 783.99,
   '_' : 0
-}
+} # Hz
 NOTE_STRING = "ABCDEFG_GFEDCBA_" # Note names, where '_' is a rest
 
 # Generates the appropriate header for a .wav file
@@ -43,37 +43,47 @@ def generate_header(data_size):
     data_size
   )    
 
-# Generate a sine wave of the note 'n' for duration of 'd' milliseconds.
-def sine(n, d, s):
+# Generate a waveform 'w' of the notes in string 'n', each for a duration of 'd' milliseconds.
+def generate_waveform(w, n, d):
+  # Number of samples taken per note
   samples = int(SAMPLE_RATE * ( d / 1000))
+
+  # Loop through the note-string and process each note
   for note in n:
+
     frequency = FREQUENCY[note]
+
+    # Handle rests
     if frequency == 0:
       for t in range(int(samples)):
         yield 128
       continue
 
+    # Get the wavelength of a note in samples
     wavelength = SAMPLE_RATE / frequency
 
-    for i in range(int(samples)):
-      # We must recast 's' to the actual time, in seconds
-      realtime = (i / SAMPLE_RATE)
-      if s == 'sine':
-        # Find the point on the sine graph with the real time
-        point = math.sin(2 * math.pi * realtime * frequency)
-      elif s == 'square':
-        point = math.copysign(1, math.sin(2 * math.pi * realtime * frequency))
-      elif s == 'tri':
-        point = ((realtime * frequency) - 2 * math.floor(((realtime * frequency) + 1) / 2)) * math.pow(-1, math.floor(((realtime * frequency) + 1) / 2))
-      elif s == 'saw':
-        point = 2 * ((realtime * frequency) - math.floor(realtime * frequency)) - 1
+    # Process each sample, using the wavelength to convert each back into time
+    for t in range(int(samples)):
+      if w == 'sine':
+        point = math.sin(2 * math.pi * (t / wavelength))
+      elif w == 'square':
+        point = math.copysign(1, math.sin(2 * math.pi * (t / wavelength)))
+      elif w == 'tri':
+        point = ((t / wavelength) - 2 * math.floor(((t / wavelength) + 1) / 2)) * math.pow(-1, math.floor(((t / wavelength) + 1) / 2))
+      elif w == 'saw':
+        point = 2 * ((t / wavelength) - math.floor(t / wavelength)) - 1
       # Because the above assumes amplitude = 1, we recast to an unsigned integer
       yield round((point * 127) + 127)
 
 
 # Open the output file for our waveform
 with open('wavesout.wav', 'wb') as fileout:
-  data = bytes(sine(NOTE_STRING, NOTE_DURATION, 'sine')) + bytes(sine(NOTE_STRING, NOTE_DURATION, 'square')) + bytes(sine(NOTE_STRING, NOTE_DURATION, 'tri')) + bytes(sine(NOTE_STRING, NOTE_DURATION, 'saw'))
+  # Write one of each waveform shape to our output
+  data = bytes(generate_waveform('sine', NOTE_STRING, NOTE_DURATION)) 
+  data += bytes(generate_waveform('square', NOTE_STRING, NOTE_DURATION))
+  data += bytes(generate_waveform('tri', NOTE_STRING, NOTE_DURATION))
+  data += bytes(generate_waveform('saw', NOTE_STRING, NOTE_DURATION))
+
   headers = generate_header(len(data))
   fileout.write(headers)
   fileout.write(data)
